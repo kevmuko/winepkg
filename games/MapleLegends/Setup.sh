@@ -6,6 +6,7 @@ PAYLOAD_URL="https://www.dropbox.com/s/quplfjb82cd0u6q/Payload.tar.gz?dl=1"
 if ! [[ -d "./Payload" ]]; then
   wget -O Payload.tar.gz "${PAYLOAD_URL}"
   tar -xzvf ./Payload.tar.gz
+  rm -rf ./Payload.tar.gz
 fi
 
 cp -f ./Legends.ini ./Payload/Legends.ini
