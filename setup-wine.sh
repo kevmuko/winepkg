@@ -2,7 +2,7 @@
 
 CONF=/etc/apt/apt.conf.d/99-insecure
 echo "APT::Get::AllowUnauthenticated \"true\";" >> "${CONF}"
-echo "Acquire::AllowInsecureRepositories \"true\";" > "${CONF}"
+echo "Acquire::AllowInsecureRepositories \"true\";" >> "${CONF}"
 
 apt update
 apt install -y wget
