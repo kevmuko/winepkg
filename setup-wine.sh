@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo su
+
 CONF=/etc/apt/apt.conf.d/99-insecure
 echo "APT::Get::AllowUnauthenticated \"true\";" >> "${CONF}"
 echo "Acquire::AllowInsecureRepositories \"true\";" >> "${CONF}"
