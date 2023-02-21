@@ -22,5 +22,5 @@ Name=MapleLegends
 Comment=MapleLegends
 Icon=$(pwd)/Icon.png" > ~/Desktop/MapleLegends.desktop
 
+gio set ~/Desktop/MapleLegends.desktop "metadata::trusted" true
 chmod a+x ~/Desktop/MapleLegends.desktop
-gio set ~/Desktop/MapleLegends.desktop metadata::trusted true
