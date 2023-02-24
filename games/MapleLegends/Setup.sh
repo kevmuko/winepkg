@@ -8,15 +8,19 @@ if ! [[ -d "./Payload" ]]; then
   tar -xzvf ./Payload.tar.gz
   rm -rf ./Payload.tar.gz
 fi
+if ! [[ -d "~/.wine-appimage" ]]; then
+  echo "wine is not initialized!"
+  exit 1
+fi
 
 cp -f ./Legends.ini ./Payload/Legends.ini
-cp -f ./DLLs/*.dll ~/.wine/drive_c/windows/syswow64
+cp -f ./DLLs/*.dll ~/.wine-appimage/drive_c/windows/syswow64
 
 echo "#!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.0
 Type=Application
-Terminal=true
+Terminal=false
 Exec=$(pwd)/MapleLegends.sh
 Name=MapleLegends
 Comment=MapleLegends

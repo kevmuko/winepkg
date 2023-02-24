@@ -1,19 +1,14 @@
-#!/bin/sh
+#!/bin/bash
+set -e
+cd "$(dirname "$0")"
 
-sudo su
+VERSION=8.1
+FILE="wine-staging_${VERSION}-x86_64.appimage"
 
-CONF=/etc/apt/apt.conf.d/99-insecure
-echo "APT::Get::AllowUnauthenticated \"true\";" >> "${CONF}"
-echo "Acquire::AllowInsecureRepositories \"true\";" >> "${CONF}"
+mkdir -p bin && cd bin
+wget "https://github.com/mmtrt/WINE_AppImage/releases/download/continuous-staging/${FILE}"
+chmod +x "${FILE}"
+ln -s "${FILE}" "wine"
 
-apt update
-apt install -y wget
-
-# Install Wine
-dpkg --add-architecture i386
-mkdir -pm755 /etc/apt/keyrings
-wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
-wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/focal/winehq-focal.sources
-
-apt update
-apt install --install-recommends -y winehq-staging
+# Launch and create WINEPREFIX
+./wine

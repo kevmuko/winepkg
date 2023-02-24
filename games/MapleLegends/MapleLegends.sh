@@ -2,7 +2,8 @@
 set -e
 cd "$(dirname "$0")/Payload"
 
-CMD="wine ./MapleLegends.exe"
+WINE=../../../bin/wine
+CMD="${WINE} ./MapleLegends.exe"
 if [[ -x "$(command -v FEXBash)" ]]; then
   FEXBash -c "${CMD}"
 else
