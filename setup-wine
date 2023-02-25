@@ -8,7 +8,7 @@ FILE="wine-staging_${VERSION}-x86_64.appimage"
 mkdir -p bin && cd bin
 wget "https://github.com/mmtrt/WINE_AppImage/releases/download/continuous-staging/${FILE}"
 chmod +x "${FILE}"
-ln -s "${FILE}" "wine"
+ln -s "${FILE}" "wine.appimage"
 
 # Launch and create WINEPREFIX
-./wine
+./bin/wine

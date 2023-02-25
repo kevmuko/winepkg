@@ -1,1 +1,9 @@
-wine-staging_8.1-x86_64.appimage
+#!/bin/bash
+
+WINE="$(dirname "$0")/wine.appimage"
+CMD="${WINE} $@"
+if [[ -x "$(command -v FEXBash)" ]]; then
+  FEXBash -c "${CMD}"
+else
+  bash -c "${CMD}"
+fi
