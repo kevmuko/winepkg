@@ -13,7 +13,6 @@ if ! [[ -d "~/.wine-appimage" ]]; then
   exit 1
 fi
 
-cp -f ./Legends.ini ./Payload/Legends.ini
 cp -f ./DLLs/*.dll ~/.wine-appimage/drive_c/windows/syswow64
 
 echo "#!/usr/bin/env xdg-open
