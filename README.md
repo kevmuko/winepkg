@@ -1,8 +1,17 @@
 # wine
 
-## FEX-Emu
+## Setup Wine
 
-### Setting up RootFS
+Run `./bin/setup-wine` to fetch the latest wine-staging appimage from
+[mmtrt/WINE_AppImage](https://github.com/mmtrt/WINE_AppImage). This will
+extract the appimage and create symlinks to call wine conveniently.
+
+## Setup FEX-Emu
+
+Run `./bin/setup-fex` to install FEX-Emu on an Ubuntu ARM64 system. Only do this
+on ARM64.
+
+### Fetch RootFS
 
 ```
 ubuntu@ubuntu:~/.fex-emu/RootFS$ FEXRootFSFetcher
@@ -44,7 +53,7 @@ y
 Ubuntu_20_04 set as default RootFS
 ```
 
-### Updating packages in RootFS
+### Updating RootFS packages
 
 ```
 ubuntu@ubuntu:~/.fex-emu/RootFS/Ubuntu_20_04$ ./unbreak_chroot.sh 
