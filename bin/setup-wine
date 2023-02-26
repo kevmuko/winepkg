@@ -12,7 +12,7 @@ FILE="$(basename "${RELEASE_URL}")"
 
 wget "${RELEASE_URL}"
 chmod +x "${FILE}"
-ln -s "${FILE}" "wine.appimage"
+ln -sf "${FILE}" "wine.appimage"
 
 # Launch and create WINEPREFIX
 ./wine
