@@ -15,4 +15,4 @@ chmod +x "${FILE}"
 ln -s "${FILE}" "wine.appimage"
 
 # Launch and create WINEPREFIX
-./bin/wine
+./wine
