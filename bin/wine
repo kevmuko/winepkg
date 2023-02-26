@@ -1,7 +1,9 @@
 #!/bin/bash
 
-WINE="$(dirname "$0")/wine.appimage"
-CMD="NO_CLEANUP=1 ${WINE} --appimage-extract-and-run $@"
+WINE="$(dirname "$0")/wine.apprun"
+CMD="${WINE} $@"
+
+# Run with FEXBash if it's installed
 if [[ -x "$(command -v FEXBash)" ]]; then
   FEXBash -c "${CMD}"
 else

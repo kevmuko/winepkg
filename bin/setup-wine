@@ -2,7 +2,7 @@
 set -e
 cd "$(dirname "$0")"
 
-# Determine lataest wine-staging release to download
+# Determine latest wine-staging release to download
 RELEASE_URL="$(
   curl -s -H "Accept: application/vnd.github+json" \
     https://api.github.com/repos/mmtrt/WINE_AppImage/releases | \
@@ -10,9 +10,17 @@ RELEASE_URL="$(
 )"
 FILE="$(basename "${RELEASE_URL}")"
 
+rm -rf *.appimage *.AppImage
+rm -rf *.apprun
+rm -rf squashfs-root
+
 wget "${RELEASE_URL}"
 chmod +x "${FILE}"
 ln -sf "${FILE}" "wine.appimage"
 
-# Launch and create WINEPREFIX
+# Extract the appimage since FUSE support is not guaranteed on some systems
+./wine.appimage --appimage-extract
+ln -sf "./squashfs-root/AppRun" "wine.apprun"
+
+# Run once to create ~/.wine-appimage prefix
 ./wine
