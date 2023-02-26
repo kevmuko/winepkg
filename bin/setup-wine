@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")"
+
+# Determine lataest wine-staging release to download
+RELEASE_URL="$(
+  curl -s -H "Accept: application/vnd.github+json" \
+    https://api.github.com/repos/mmtrt/WINE_AppImage/releases | \
+      sed -nr "s/^.*\"browser_download_url\": \"(.+\/continuous-staging\/.+.AppImage)\"/\\1/p"
+)"
+FILE="$(basename "${RELEASE_URL}")"
+
+mkdir -p bin && cd bin
+wget "${RELEASE_URL}"
+chmod +x "${FILE}"
+ln -s "${FILE}" "wine.appimage"
+
+# Launch and create WINEPREFIX
+./bin/wine
