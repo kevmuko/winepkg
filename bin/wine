@@ -1,7 +1,7 @@
 #!/bin/bash
 
 WINE="$(dirname "$0")/wine.appimage"
-CMD="${WINE} $@"
+CMD="NO_CLEANUP=1 ${WINE} --appimage-extract-and-run $@"
 if [[ -x "$(command -v FEXBash)" ]]; then
   FEXBash -c "${CMD}"
 else

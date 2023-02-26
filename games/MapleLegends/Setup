@@ -8,7 +8,7 @@ if ! [[ -d "./Payload" ]]; then
   tar -xzvf ./Payload.tar.gz
   rm -rf ./Payload.tar.gz
 fi
-if ! [[ -d "~/.wine-appimage" ]]; then
+if ! [[ -d "${HOME}/.wine-appimage" ]]; then
   echo "wine is not initialized!"
   exit 1
 fi
