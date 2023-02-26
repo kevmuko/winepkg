@@ -10,7 +10,6 @@ RELEASE_URL="$(
 )"
 FILE="$(basename "${RELEASE_URL}")"
 
-mkdir -p bin && cd bin
 wget "${RELEASE_URL}"
 chmod +x "${FILE}"
 ln -s "${FILE}" "wine.appimage"
