@@ -20,7 +20,7 @@ echo "#!/usr/bin/env xdg-open
 Version=1.0
 Type=Application
 Terminal=false
-Exec=$(pwd)/MapleLegends.sh
+Exec=$(pwd)/MapleLegends
 Name=MapleLegends
 Comment=MapleLegends
 Icon=$(pwd)/Icon.png" > ~/Desktop/MapleLegends.desktop
