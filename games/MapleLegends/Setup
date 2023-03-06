@@ -36,6 +36,6 @@ Comment=MapleLegends Update
 Icon=$(pwd)/UpdateIcon.png" > ~/Desktop/MapleLegendsUpdate.desktop
 
 gio set ~/Desktop/MapleLegends.desktop "metadata::trusted" true
-gio set ~/Desktop/MapleLegendsUpdater.desktop "metadata::trusted" true
+gio set ~/Desktop/MapleLegendsUpdate.desktop "metadata::trusted" true
 chmod a+x ~/Desktop/MapleLegends.desktop
 chmod a+x ~/Desktop/MapleLegendsUpdate.desktop
