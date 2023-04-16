@@ -16,24 +16,24 @@ fi
 cp -f ./DLLs/*.dll ~/.wine-appimage/drive_c/windows/syswow64
 
 echo "#!/usr/bin/env xdg-open
-[Desktop Entry]
-Version=1.0
-Type=Application
-Terminal=false
-Exec=$(pwd)/MapleLegends
-Name=MapleLegends
-Comment=MapleLegends
-Icon=$(pwd)/Icon.png" > ~/Desktop/MapleLegends.desktop
+	[Desktop Entry]
+	Version=1.0
+	Type=Application
+	Terminal=false
+	Exec=$(pwd)/MapleLegends
+	Name=MapleLegends
+	Comment=MapleLegends
+	Icon=$(pwd)/Icon.png" > ~/Desktop/MapleLegends.desktop
 
 echo "#!/usr/bin/env xdg-open
-[Desktop Entry]
-Version=1.0
-Type=Application
-Terminal=true
-Exec=$(pwd)/Update
-Name=MapleLegends Update
-Comment=MapleLegends Update
-Icon=$(pwd)/UpdateIcon.png" > ~/Desktop/MapleLegendsUpdate.desktop
+	[Desktop Entry]
+	Version=1.0
+	Type=Application
+	Terminal=true
+	Exec=$(pwd)/Update
+	Name=MapleLegends Update
+	Comment=MapleLegends Update
+	Icon=steamdeck-gaming-return" > ~/Desktop/MapleLegendsUpdate.desktop
 
 gio set ~/Desktop/MapleLegends.desktop "metadata::trusted" true
 gio set ~/Desktop/MapleLegendsUpdate.desktop "metadata::trusted" true
