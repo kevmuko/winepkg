@@ -1,0 +1,50 @@
+version: 1
+
+script: |
+  export APPNAME=MapleLegends
+  apt install -y squashfs-tools
+
+  # Setup AppDir and copy over files
+  rm -rf $TARGET_APPDIR
+  mkdir -p $TARGET_APPDIR/{bin,usr/share/icons}
+  cp -rf ./App $TARGET_APPDIR
+  cd $TARGET_APPDIR
+
+  # Link the app icon
+  ln -sf ../../../App/$APPNAME.png ./usr/share/icons/$APPNAME.png
+
+  # Download wine.appimage
+  wget "https://github.com/mmtrt/WINE_AppImage/releases/download/continuous-staging/wine-staging_8.6-x86_64.AppImage" -O ./bin/wine.appimage
+  chmod +x ./bin/wine.appimage
+
+  # Setup MapleLegends game data
+  wget "https://www.dropbox.com/s/quplfjb82cd0u6q/Payload.tar.gz?dl=1" -O ./App/Payload.tar.gz
+  tar -xzf ./App/Payload.tar.gz -C ./App
+  rm -f ./App/Payload.tar.gz
+
+AppDir:
+  app_info:
+    id: MapleLegends
+    name: MapleLegends
+    icon: MapleLegends
+    version: 1.0.0
+    exec: bin/bash
+    exec_args: "$APPDIR/App/Run $@"
+
+  apt:
+    arch: [amd64, i386]
+    sources:
+      - sourceline: "deb http://archive.ubuntu.com/ubuntu/ lunar main restricted universe multiverse"
+      - sourceline: "deb http://archive.ubuntu.com/ubuntu/ lunar-updates main restricted universe multiverse"
+      - sourceline: "deb http://archive.ubuntu.com/ubuntu/ lunar-backports main restricted universe multiverse"
+        key_url: "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x871920D1991BC93C"
+    include:
+      - bash
+      - coreutils
+      - e2fsprogs
+      - libfuse2
+
+AppImage:
+  update-information: None
+  sign-key: None
+  arch: x86_64

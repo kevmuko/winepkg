@@ -1,14 +1,12 @@
-# wine
+# winewrap
 
-## Setup Wine
+## Build AppImage
 
-Run `./bin/setup-wine` to fetch the latest wine-staging appimage from
-[mmtrt/WINE_AppImage](https://github.com/mmtrt/WINE_AppImage). This will
-extract the appimage and create symlinks to call wine conveniently.
+Run `docker-compose run --rm appimage` in one of the `appimages/` directories.
 
 ## Setup FEX-Emu
 
-Run `./bin/setup-fex` to install FEX-Emu on an Ubuntu ARM64 system. Only do this
+Run `./bin/InstallFEX` to install FEX-Emu on an Ubuntu ARM64 system. Only do this
 on ARM64.
 
 ### Fetch RootFS

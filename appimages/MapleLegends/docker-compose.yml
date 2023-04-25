@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  appimage:
+    image: appimagecrafters/appimage-builder:1.1.0
+    working_dir: /app
+    command:
+      - appimage-builder
+      - --recipe
+      - ./AppImageBuilder.yml
+    volumes:
+      - .:/app

@@ -1,0 +1,70 @@
+#!/bin/bash
+set -e
+DIR="$(readlink -f $(dirname $0))"
+WINE="${DIR}/../bin/wine.appimage"
+WINEPREFIX="${HOME}/.wine-appimage"
+WORKDIR="${HOME}/.MapleLegends"
+
+# OverlayFS to enable R/W for Wine in the Payload directory.
+DATA_DISK="${WORKDIR}/data.img"
+DATA_DISK_MOUNT="${WORKDIR}/data"
+OVL_MOUNT="${DATA_DISK_MOUNT}/mount"
+OVL_UPPER="${DATA_DISK_MOUNT}/upper"
+OVL_LOWER="${DIR}/Payload"
+OVL_WORK="${DATA_DISK_MOUNT}/work"
+
+disk_create() {
+  mkdir -p "${WORKDIR}"
+  truncate -s 10M "${DATA_DISK}"
+  mkfs.ext4 "${DATA_DISK}"
+}
+
+disk_unmount() {
+  umount "${DATA_DISK_MOUNT}" > /dev/null 2>&1 || true
+}
+
+disk_mount() {
+  disk_unmount
+  mkdir -p "${DATA_DISK_MOUNT}"
+  mount -o loop "${DATA_DISK}" "${DATA_DISK_MOUNT}"
+}
+
+ovl_unmount() {
+  umount "${OVL_MOUNT}" > /dev/null 2>&1 || true
+}
+
+ovl_mount() {
+  ovl_unmount
+  mkdir -p "${OVL_MOUNT}" "${OVL_UPPER}" "${OVL_WORK}"
+  mount \
+    -t overlay overlay \
+    -o lowerdir="${OVL_LOWER}",upperdir="${OVL_UPPER}",workdir="${OVL_WORK}" \
+    "${OVL_MOUNT}"
+}
+
+cleanup() {
+  ovl_unmount
+  disk_unmount
+}
+
+main() {
+  trap cleanup EXIT
+
+  if [[ ! -f "${DATA_DISK}" ]]; then
+    disk_create
+  fi
+  disk_mount
+  ovl_mount
+
+  if [[ "$1" == "--config" ]] || [[ ! -d "${WINEPREFIX}" ]]; then
+    "${WINE}" winecfg
+  fi
+  if [[ "$1" == "--legends-config" ]]; then
+    "${WINE}" start /d "${OVERLAY}" notepad Legends.ini
+  fi
+
+  cp -f "${DIR}"/DLLs/*.dll "${WINEPREFIX}"/drive_c/windows/syswow64
+  "${WINE}" start /d "${OVERLAY}" MapleLegends.exe
+}
+
+main "$@"
